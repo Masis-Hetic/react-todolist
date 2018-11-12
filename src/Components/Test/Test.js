@@ -6,6 +6,7 @@ export class Test extends React.Component{
 		this.state = {
 			nameSite: '',
 			urlSite: '',
+			index: null,
 			myStorageTab: [],
 			storage: JSON.parse(localStorage.getItem('mes-sites'))
 		};
@@ -25,15 +26,27 @@ export class Test extends React.Component{
 			this.state.myStorageTab.push({ nameSite: this.state.nameSite, urlSite: this.state.urlSite });
 			localStorage.setItem('mes-sites', JSON.stringify(this.state.myStorageTab));
 		}
+		if (this.state.index !== null) {
+			const storageIndex = this.state.storage;
+			storageIndex[this.state.index].nameSite = this.state.nameSite;
+			storageIndex[this.state.index].urlSite = this.state.urlSite;
+			localStorage.setItem('mes-sites', JSON.stringify(storageIndex));
+			this.setState({ index: null });
+		}
+		this.setState({ nameSite: '', urlSite: '' });
+		this.refName.value = this.state.nameSite;
+		this.refUrl.value = this.state.urlSite;
 	}
 
 	handleClickItem(e) {
 		const getIndex = e.target.getAttribute('id');
+		this.setState({ index: getIndex }, () => console.log(this.state.index));
+
 		this.setState({ nameSite: this.state.storage[getIndex].nameSite, urlSite: this.state.storage[getIndex].urlSite });
 		this.refName.value = this.state.nameSite;
 		this.refUrl.value = this.state.urlSite
 	}
-	// todo utiliser un booleen pour faire le switch entre nouvelle entrée dans le storage, et mise à jour dans le storage
+
 	render() {
 		return (
 			<div>
