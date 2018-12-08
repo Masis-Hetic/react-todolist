@@ -1,5 +1,8 @@
 import React from 'react';
 import { List } from "../List/List";
+import './Form.css';
+import {InputName} from "./InputName";
+import {InputUrl} from "./InputUrl";
 
 export class Form extends React.Component{
 	constructor(props) {
@@ -16,7 +19,7 @@ export class Form extends React.Component{
 	}
 
 	componentWillMount() { this.setState({ myStorageTab: JSON.parse(localStorage.getItem('mes-sites')) || [] });	}
-	handleNameChanges = e => { this.setState({ nameSite: e.target.value });	};
+	handleNameChanges = e => { this.setState({ nameSite: e.target.value }); };
 	handleUrlChanges = e => {	this.setState({ urlSite: e.target.value });	};
 
 	static handleSubmit(e) {
@@ -49,10 +52,7 @@ export class Form extends React.Component{
 	handleClickItem = e => {
 		const getIndex = e.target.getAttribute('id');
 		this.setState({ index: getIndex });
-		this.setState({
-			nameSite: this.state.storage[getIndex].nameSite,
-			urlSite: this.state.storage[getIndex].urlSite
-		});
+		this.setState({ nameSite: this.state.storage[getIndex].nameSite, urlSite: this.state.storage[getIndex].urlSite });
 
 		this.refName.value = this.state.nameSite;
 		this.refUrl.value = this.state.urlSite
@@ -63,22 +63,18 @@ export class Form extends React.Component{
 			<div>
 				<form onSubmit={Form.handleSubmit}>
 					<div className="wrapper">
-						<input
-							type="text"
-							placeholder="nom"
-							value={this.state.nameSite}
-							onChange={this.handleNameChanges}
-							ref={input => this.refName = input}
+						<InputName
+							triggerChanges={this.handleNameChanges}
+							storage={this.state.nameSite}
+							reference={input => this.refName = input}
 						/>
 					</div>
 
 					<div className="wrapper">
-						<input
-							type="text"
-							placeholder="url"
-							onChange={this.handleUrlChanges}
-							value={this.state.urlSite}
-							ref={(input) => this.refUrl = input}
+						<InputUrl
+							triggerChanges={this.handleUrlChanges}
+							storage={this.state.urlSite}
+							reference={input => this.refUrl = input}
 						/>
 					</div>
 
@@ -87,7 +83,7 @@ export class Form extends React.Component{
 					</div>
 				</form>
 
-				<div>
+				<div className="list-wrapper">
 					{ this.state.count >= 0 && <List triggerClick={this.handleClickItem} storage={this.state.storage} /> }
 				</div>
 			</div>
