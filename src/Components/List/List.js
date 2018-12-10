@@ -1,8 +1,10 @@
 import React from 'react';
 import './List.css';
+import Countdown from "../CountDown/CountDown";
 
 export class List extends React.Component {
 	triggerClick;
+
 	render() {
 		return (
 			<ul>
@@ -13,7 +15,8 @@ export class List extends React.Component {
 						id={i}
 						onClick={this.props.triggerClick}
 					>
-						{item.nameSite} : {item.urlSite}
+						<p className="no-click">{item.nameSite} : {item.urlSite}</p>
+						<p className="no-click"><Countdown date={this.props.storage[i].date}/></p>
 					</li>
 					)
 				}

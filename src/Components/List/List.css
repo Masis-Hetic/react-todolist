@@ -16,3 +16,5 @@ ul li {
 }
 
 ul li::-webkit-scrollbar { display : none; }
+
+p.no-click { pointer-events: none; }
