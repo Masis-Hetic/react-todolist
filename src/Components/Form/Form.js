@@ -19,15 +19,23 @@ export class Form extends React.Component{
 			openCloseForm: 'close',
 			storage: JSON.parse(localStorage.getItem('mes-sites'))
 		};
-		Form.handleSubmit = Form.handleSubmit.bind(this);
+		// Form.handleSubmit = Form.handleSubmit.bind(this);
 	}
+
+
+	orderTab = () => {
+		let myTab = this.state.storage;
+		myTab.sort(function(a, b) { return a.date - b.date; });
+		localStorage.setItem('mes-sites', JSON.stringify(myTab));
+	}
+
 
 	componentWillMount() { this.setState({ myStorageTab: JSON.parse(localStorage.getItem('mes-sites')) || [] });	}
 	handleNameChanges = e => { this.setState({ nameSite: e.target.value }); };
 	handleUrlChanges = e => {	this.setState({ urlSite: e.target.value });	};
 	handleDateChanges = e => { this.setState( { dateToDisplay: e.target.value, date: Date.parse(e.target.value) }); }
 
-	static handleSubmit(e) {
+	handleSubmit = e => {
 		e.preventDefault();
 
 		if ((this.state.nameSite !== '' && this.state.urlSite !== '' && this.state.date !== 'yyyy-MM-ddThh:mm') && this.state.index === null) {
@@ -37,7 +45,12 @@ export class Form extends React.Component{
 				dateToDisplay: this.state.dateToDisplay,
 				date: this.state.date
 			});
-			localStorage.setItem('mes-sites', JSON.stringify(this.state.myStorageTab));
+
+			let myTab = this.state.storage;
+			myTab.sort(function(a, b) { return a.date - b.date; });
+			localStorage.setItem('mes-sites', JSON.stringify(myTab));
+
+			// localStorage.setItem('mes-sites', JSON.stringify(this.state.myStorageTab));
 			this.setState({ count: this.state.count + 1, storage: JSON.parse(localStorage.getItem('mes-sites')) });
 		}
 
@@ -48,7 +61,11 @@ export class Form extends React.Component{
 			storageTab[this.state.index].dateToDisplay = this.state.dateToDisplay
 			storageTab[this.state.index].date = this.state.date;
 
+
 			this.setState({ myStorageTab: storageTab });
+			// let myTab = this.state.myStorageTab;
+			// myTab.sort(function(a, b) { return a.date - b.date; });
+			// localStorage.setItem('mes-sites', JSON.stringify(myTab));
 			localStorage.setItem('mes-sites', JSON.stringify(this.state.myStorageTab));
 
 			this.setState({
@@ -86,7 +103,7 @@ export class Form extends React.Component{
 	render() {
 		return (
 			<div className="form-wrapper">
-				<form className={this.state.openCloseForm} onSubmit={Form.handleSubmit}>
+				<form className={this.state.openCloseForm} onSubmit={this.handleSubmit}>
 					<div className="close-menu" onClick={this.closeForm}>
 						<svg className="width:24px;height:24px" viewBox="0 0 24 24">
 							<path fill="#000000"
