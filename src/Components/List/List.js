@@ -6,6 +6,7 @@ export class List extends React.Component {
 	triggerClick;
 
 	render() {
+		console.log(this.props.storage);
 		return (
 			<ul>
 				{this.props.storage &&
@@ -16,7 +17,7 @@ export class List extends React.Component {
 						onClick={this.props.triggerClick}
 					>
 						<p className="no-click">{item.nameSite} : {item.urlSite}</p>
-						<p className="no-click"><Countdown date={this.props.storage[i].date}/></p>
+						<div className="no-click"><Countdown date={this.props.storage[i].date}/></div>
 					</li>
 					)
 				}

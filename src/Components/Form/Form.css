@@ -1,10 +1,60 @@
+div.form-wrapper {
+
+}
+
 form {
   background : hotpink;
-  /*position   : absolute;*/
-  /*left       : -100%;*/
-  /*top        : 0;*/
-  /*height     : 100%;*/
-  /*width      : 20vw;*/
+  position   : absolute;
+  left       : -100%;
+  top        : 0;
+  height     : 100%;
+  width      : 20vw;
+}
+
+form.open {
+  left : 0;
+}
+
+div.close-menu {
+  width    : 24px;
+  height   : 24px;
+  position : absolute;
+  top      : 10px;
+  right    : 10px;
+  cursor   : pointer;
+}
+
+div.input-wrapper {
+  width             : 85%;
+  margin            : 0 auto;
+  position          : relative;
+  top               : 50%;
+  -webkit-transform : translateY(-50%);
+  -moz-transform    : translateY(-50%);
+  -ms-transform     : translateY(-50%);
+  -o-transform      : translateY(-50%);
+  transform         : translateY(-50%);
+}
+
+div.input-wrapper .wrapper input {
+  line-height : 2.5;
+  font-size   : 15px;
+  width       : 100%;
+}
+
+div.input-wrapper .wrapper:nth-of-type(even) {
+  margin : 30px auto;
+}
+
+div.input-wrapper .wrapper input[type="text"] {
+  padding-left : 10px;
+}
+
+div.input-wrapper .wrapper input[type="submit"] {
+  -webkit-appearance : none;
+  -moz-appearance    : none;
+  appearance         : none;
+  line-height        : 2.5;
 }
 
 div.list-wrapper { width : 50%; }

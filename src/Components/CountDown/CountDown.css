@@ -1,0 +1,16 @@
+div.countdown {
+  display         : flex;
+  justify-content : space-between;
+  width           : 90%;
+  margin          : 0 auto;
+}
+
+span.countdown-col-element {
+  display        : flex;
+  flex-direction : column;
+}
+
+span.countdown-col-element span {
+  text-transform : uppercase;
+  font-size      : 12px;
+}

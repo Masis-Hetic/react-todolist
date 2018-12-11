@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './CountDown.css';
 // import PropTypes from 'prop-types'
 
 class Countdown extends Component {
@@ -74,7 +75,7 @@ class Countdown extends Component {
 		clearInterval(this.interval);
 	}
 
-	addLeadingZeros(value) {
+	static addLeadingZeros(value) {
 		value = String(value);
 		while (value.length < 2) {
 			value = '0' + value;
@@ -86,32 +87,32 @@ class Countdown extends Component {
 		const countDown = this.state;
 
 		return (
-			<div className="Countdown">
-        <span className="Countdown-col">
-          <span className="Countdown-col-element">
-              <strong>{this.addLeadingZeros(countDown.days)}</strong>
+			<div className="countdown">
+        <span className="countdown-col">
+          <span className="countdown-col-element">
+              <strong>{Countdown.addLeadingZeros(countDown.days)}</strong>
               <span>{countDown.days === 1 ? 'Day' : 'Days'}</span>
           </span>
         </span>
 
-				<span className="Countdown-col">
-          <span className="Countdown-col-element">
-            <strong>{this.addLeadingZeros(countDown.hours)}</strong>
+				<span className="countdown-col">
+          <span className="countdown-col-element">
+            <strong>{Countdown.addLeadingZeros(countDown.hours)}</strong>
             <span>Hours</span>
           </span>
         </span>
 
 
-				<span className="Countdown-col">
-          <span className="Countdown-col-element">
-            <strong>{this.addLeadingZeros(countDown.min)}</strong>
+				<span className="countdown-col">
+          <span className="countdown-col-element">
+            <strong>{Countdown.addLeadingZeros(countDown.min)}</strong>
             <span>Min</span>
           </span>
         </span>
 
-				<span className="Countdown-col">
-          <span className="Countdown-col-element">
-            <strong>{this.addLeadingZeros(countDown.sec)}</strong>
+				<span className="countdown-col">
+          <span className="countdown-col-element">
+            <strong>{Countdown.addLeadingZeros(countDown.sec)}</strong>
             <span>Sec</span>
           </span>
         </span>

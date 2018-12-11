@@ -13,9 +13,10 @@ export class Form extends React.Component{
 			urlSite: '',
 			index: null,
 			count: 0,
-			dateToDisplay: '',
+			dateToDisplay: 'yyyy-MM-ddThh:mm',
 			date: 'yyyy-MM-ddThh:mm',
 			myStorageTab: [],
+			openCloseForm: 'close',
 			storage: JSON.parse(localStorage.getItem('mes-sites'))
 		};
 		Form.handleSubmit = Form.handleSubmit.bind(this);
@@ -29,7 +30,7 @@ export class Form extends React.Component{
 	static handleSubmit(e) {
 		e.preventDefault();
 
-		if ((this.state.nameSite !== '' && this.state.urlSite !== '') && this.state.index === null) {
+		if ((this.state.nameSite !== '' && this.state.urlSite !== '' && this.state.date !== 'yyyy-MM-ddThh:mm') && this.state.index === null) {
 			this.state.myStorageTab.push({
 				nameSite: this.state.nameSite,
 				urlSite: this.state.urlSite,
@@ -55,14 +56,13 @@ export class Form extends React.Component{
 			});
 		}
 
-		this.setState({ nameSite: '', urlSite: '', dateToDisplay: 'yyyy-MM-ddThh:mm' });
+		this.setState({ nameSite: '', urlSite: '', dateToDisplay: 'yyyy-MM-ddThh:mm', date: 'yyyy-MM-ddThh:mm' });
 		this.refName.value = this.state.nameSite;
 		this.refUrl.value = this.state.urlSite;
 		this.refDate.value = this.state.dateToDisplay;
 
 	}
-	// TODO
-	//  faire en sorte que la date s'affiche dans le input au premier click et pas au second
+
 	handleClickItem = e => {
 		const getIndex = e.target.getAttribute('id');
 
@@ -70,49 +70,67 @@ export class Form extends React.Component{
 		this.setState({
 			nameSite: this.state.storage[getIndex].nameSite,
 			urlSite: this.state.storage[getIndex].urlSite,
-			dateToDisplay: this.state.storage[getIndex].dateToDisplay
+			dateToDisplay: this.state.storage[getIndex].dateToDisplay,
+			date: this.state.storage[getIndex].date
 		});
 
 		this.refName.value = this.state.nameSite;
 		this.refUrl.value = this.state.urlSite
 		this.refDate.value = this.state.dateToDisplay;
+
+		this.setState({ openCloseForm: this.state.openCloseForm === 'open' ? 'close' : 'open' });
 	};
+
+	closeForm = () => { this.setState({ openCloseForm: this.state.openCloseForm === 'open' ? 'close' : 'open' }); }
 
 	render() {
 		return (
-			<div>
-				<form onSubmit={Form.handleSubmit}>
-					<div className="wrapper">
-						<InputName
-							triggerChanges={this.handleNameChanges}
-							storage={this.state.nameSite}
-							reference={input => this.refName = input}
-						/>
+			<div className="form-wrapper">
+				<form className={this.state.openCloseForm} onSubmit={Form.handleSubmit}>
+					<div className="close-menu" onClick={this.closeForm}>
+						<svg className="width:24px;height:24px" viewBox="0 0 24 24">
+							<path fill="#000000"
+							      d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47
+							      6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"
+							/>
+						</svg>
 					</div>
 
-					<div className="wrapper">
-						<InputUrl
-							triggerChanges={this.handleUrlChanges}
-							storage={this.state.urlSite}
-							reference={input => this.refUrl = input}
-						/>
-					</div>
+					<div className="input-wrapper">
+						<div className="wrapper">
+							<InputName
+								triggerChanges={this.handleNameChanges}
+								storage={this.state.nameSite}
+								reference={input => this.refName = input}
+							/>
+						</div>
 
-					<div className="wrapper">
-						<InputDate
-							triggerChanges={this.handleDateChanges}
-							storage={this.state.dateToDisplay}
-							reference={input => this.refDate = input}
-						/>
-					</div>
+						<div className="wrapper">
+							<InputUrl
+								triggerChanges={this.handleUrlChanges}
+								storage={this.state.urlSite}
+								reference={input => this.refUrl = input}
+							/>
+						</div>
 
-					<div className="wrapper">
-						<input type="submit" />
+						<div className="wrapper">
+							<InputDate
+								triggerChanges={this.handleDateChanges}
+								storage={this.state.dateToDisplay}
+								reference={input => this.refDate = input}
+							/>
+						</div>
+
+						<div className="wrapper">
+							<input type="submit" onClick={this.closeForm}/>
+						</div>
 					</div>
 				</form>
 
 				<div className="list-wrapper">
-					{ this.state.count >= 0 && <List triggerClick={this.handleClickItem} storage={this.state.storage} /> }
+					{ this.state.count >= 0 &&
+						<List triggerClick={this.handleClickItem} storage={this.state.storage} openClose={this.state.openCloseForm} />
+					}
 				</div>
 			</div>
 		);
