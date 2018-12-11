@@ -13,7 +13,8 @@ export class Form extends React.Component{
 			urlSite: '',
 			index: null,
 			count: 0,
-			date: 'yyyy-MM-ddThh:mm:ss',
+			dateToDisplay: '',
+			date: 'yyyy-MM-ddThh:mm',
 			myStorageTab: [],
 			storage: JSON.parse(localStorage.getItem('mes-sites'))
 		};
@@ -23,13 +24,18 @@ export class Form extends React.Component{
 	componentWillMount() { this.setState({ myStorageTab: JSON.parse(localStorage.getItem('mes-sites')) || [] });	}
 	handleNameChanges = e => { this.setState({ nameSite: e.target.value }); };
 	handleUrlChanges = e => {	this.setState({ urlSite: e.target.value });	};
-	handleDateChanges = e => { this.setState( { date: Date.parse(e.target.value) }); }
+	handleDateChanges = e => { this.setState( { dateToDisplay: e.target.value, date: Date.parse(e.target.value) }); }
 
 	static handleSubmit(e) {
 		e.preventDefault();
 
 		if ((this.state.nameSite !== '' && this.state.urlSite !== '') && this.state.index === null) {
-			this.state.myStorageTab.push({ nameSite: this.state.nameSite, urlSite: this.state.urlSite, date: this.state.date });
+			this.state.myStorageTab.push({
+				nameSite: this.state.nameSite,
+				urlSite: this.state.urlSite,
+				dateToDisplay: this.state.dateToDisplay,
+				date: this.state.date
+			});
 			localStorage.setItem('mes-sites', JSON.stringify(this.state.myStorageTab));
 			this.setState({ count: this.state.count + 1, storage: JSON.parse(localStorage.getItem('mes-sites')) });
 		}
@@ -38,6 +44,7 @@ export class Form extends React.Component{
 			const storageTab = this.state.myStorageTab;
 			storageTab[this.state.index].nameSite = this.state.nameSite;
 			storageTab[this.state.index].urlSite = this.state.urlSite;
+			storageTab[this.state.index].dateToDisplay = this.state.dateToDisplay
 			storageTab[this.state.index].date = this.state.date;
 
 			this.setState({ myStorageTab: storageTab });
@@ -48,24 +55,27 @@ export class Form extends React.Component{
 			});
 		}
 
-		this.setState({ nameSite: '', urlSite: '', date: '' });
+		this.setState({ nameSite: '', urlSite: '', dateToDisplay: 'yyyy-MM-ddThh:mm' });
 		this.refName.value = this.state.nameSite;
 		this.refUrl.value = this.state.urlSite;
+		this.refDate.value = this.state.dateToDisplay;
 
 	}
-
+	// TODO
+	//  faire en sorte que la date s'affiche dans le input au premier click et pas au second
 	handleClickItem = e => {
 		const getIndex = e.target.getAttribute('id');
+
 		this.setState({ index: getIndex });
 		this.setState({
 			nameSite: this.state.storage[getIndex].nameSite,
 			urlSite: this.state.storage[getIndex].urlSite,
-			date: this.state.storage[getIndex].date
+			dateToDisplay: this.state.storage[getIndex].dateToDisplay
 		});
 
 		this.refName.value = this.state.nameSite;
 		this.refUrl.value = this.state.urlSite
-		this.refDate.value = this.state.date;
+		this.refDate.value = this.state.dateToDisplay;
 	};
 
 	render() {
@@ -91,7 +101,7 @@ export class Form extends React.Component{
 					<div className="wrapper">
 						<InputDate
 							triggerChanges={this.handleDateChanges}
-							storage={this.state.date}
+							storage={this.state.dateToDisplay}
 							reference={input => this.refDate = input}
 						/>
 					</div>
