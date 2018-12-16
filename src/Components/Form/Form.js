@@ -1,9 +1,11 @@
 import React from 'react';
-import { List } from "../List/List";
+import List from "../List/List";
 import './Form.css';
-import {InputName} from "../InputName/InputName";
-import {InputUrl} from "../InputUrl/InputUrl";
-import {InputDate} from "../InputDate/InputDate";
+import { InputName } from "../InputName/InputName";
+import { InputUrl } from "../InputUrl/InputUrl";
+import { InputDate } from "../InputDate/InputDate";
+
+import { connect } from 'react-redux';
 
 export class Form extends React.Component{
 	constructor(props) {
@@ -16,19 +18,9 @@ export class Form extends React.Component{
 			dateToDisplay: 'yyyy-MM-ddThh:mm',
 			date: 'yyyy-MM-ddThh:mm',
 			myStorageTab: [],
-			openCloseForm: 'close',
 			storage: JSON.parse(localStorage.getItem('mes-sites'))
 		};
-		// Form.handleSubmit = Form.handleSubmit.bind(this);
 	}
-
-
-	orderTab = () => {
-		let myTab = this.state.storage;
-		myTab.sort(function(a, b) { return a.date - b.date; });
-		localStorage.setItem('mes-sites', JSON.stringify(myTab));
-	}
-
 
 	componentWillMount() { this.setState({ myStorageTab: JSON.parse(localStorage.getItem('mes-sites')) || [] });	}
 	handleNameChanges = e => { this.setState({ nameSite: e.target.value }); };
@@ -46,11 +38,11 @@ export class Form extends React.Component{
 				date: this.state.date
 			});
 
-			let myTab = this.state.storage;
+			let myTab = this.state.myStorageTab;
 			myTab.sort(function(a, b) { return a.date - b.date; });
+
 			localStorage.setItem('mes-sites', JSON.stringify(myTab));
 
-			// localStorage.setItem('mes-sites', JSON.stringify(this.state.myStorageTab));
 			this.setState({ count: this.state.count + 1, storage: JSON.parse(localStorage.getItem('mes-sites')) });
 		}
 
@@ -61,12 +53,12 @@ export class Form extends React.Component{
 			storageTab[this.state.index].dateToDisplay = this.state.dateToDisplay
 			storageTab[this.state.index].date = this.state.date;
 
-
 			this.setState({ myStorageTab: storageTab });
-			// let myTab = this.state.myStorageTab;
-			// myTab.sort(function(a, b) { return a.date - b.date; });
-			// localStorage.setItem('mes-sites', JSON.stringify(myTab));
-			localStorage.setItem('mes-sites', JSON.stringify(this.state.myStorageTab));
+
+			let myTab = this.state.myStorageTab;
+			myTab.sort(function(a, b) { return a.date - b.date; });
+
+			localStorage.setItem('mes-sites', JSON.stringify(myTab));
 
 			this.setState({
 				count: this.state.count + 1, storage: JSON.parse(localStorage.getItem('mes-sites')), index: null
@@ -92,19 +84,18 @@ export class Form extends React.Component{
 		});
 
 		this.refName.value = this.state.nameSite;
-		this.refUrl.value = this.state.urlSite
+		this.refUrl.value = this.state.urlSite;
 		this.refDate.value = this.state.dateToDisplay;
-
-		this.setState({ openCloseForm: this.state.openCloseForm === 'open' ? 'close' : 'open' });
 	};
 
-	closeForm = () => { this.setState({ openCloseForm: this.state.openCloseForm === 'open' ? 'close' : 'open' }); }
 
 	render() {
 		return (
 			<div className="form-wrapper">
-				<form className={this.state.openCloseForm} onSubmit={this.handleSubmit}>
-					<div className="close-menu" onClick={this.closeForm}>
+				<form
+					className={this.props.toggleForm}
+					onSubmit={this.handleSubmit}>
+					<div className="close-menu" onClick={this.props.toggleFormF }>
 						<svg className="width:24px;height:24px" viewBox="0 0 24 24">
 							<path fill="#000000"
 							      d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47
@@ -146,10 +137,21 @@ export class Form extends React.Component{
 
 				<div className="list-wrapper">
 					{ this.state.count >= 0 &&
-						<List triggerClick={this.handleClickItem} storage={this.state.storage} openClose={this.state.openCloseForm} />
+						<List
+							storage={this.state.storage}
+							// triggerClick={this.handleClickItem}
+						// openForm={this.props.openOrCloseForm}
+						// openClose={this.state.openCloseForm}
+						/>
 					}
 				</div>
 			</div>
 		);
 	}
 }
+
+const mapStateToProps = (state) => { return { toggleForm: state.toggleForm }; };
+
+const mapDispatchToProps = (dispatch) => { return { toggleFormF: () => dispatch( {type: 'OPEN_CLOSE'} ) } };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

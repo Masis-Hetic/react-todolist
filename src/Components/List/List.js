@@ -1,12 +1,12 @@
 import React from 'react';
 import './List.css';
 import Countdown from "../CountDown/CountDown";
+import { connect } from "react-redux";
 
-export class List extends React.Component {
-	triggerClick;
+class List extends React.Component {
+	// triggerClick;
 
 	render() {
-		console.log(this.props.storage);
 		return (
 			<ul>
 				{this.props.storage &&
@@ -14,7 +14,8 @@ export class List extends React.Component {
 					<li
 						key={i}
 						id={i}
-						onClick={this.props.triggerClick}
+						// onClick={this.props.triggerClick}
+						onClick={this.props.toggleFormF}
 					>
 						<p className="no-click">{item.nameSite} : {item.urlSite}</p>
 						<div className="no-click"><Countdown date={this.props.storage[i].date}/></div>
@@ -25,3 +26,13 @@ export class List extends React.Component {
 		);
 	}
 }
+
+const mapStateToProps = (state) => {
+	return { toggleForm: state.toggleForm };
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return { toggleFormF: () => dispatch( {type: 'OPEN_CLOSE'} ) }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);

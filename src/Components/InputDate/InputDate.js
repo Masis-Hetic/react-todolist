@@ -4,7 +4,6 @@ export class InputDate extends React.Component {
 	reference;
 
 	render() {
-		console.log(this.props.storage);
 		return (
 			<input
 				type="datetime-local"
