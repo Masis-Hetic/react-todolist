@@ -36,15 +36,14 @@ class MyProvider extends Component {
 			this.setState( { localStorage: myStorage } );
 		} else {
 			this.setState( {
+				toggleForm: 'close',
 				id: id,
 				nameSite: this.state.localStorage[ id ].nameSite,
 				nameUrl: this.state.localStorage[ id ].urlSite,
 				dateToDisplay: this.state.localStorage[ id ].dateToDisplay
 			});
-			if (this.state.toggleForm === 'open') { this.setState({ toggleForm: 'close' }) }
 		}
 	};
-
 
 	render() {
 		return (
