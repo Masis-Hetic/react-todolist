@@ -17,15 +17,23 @@ class MyProvider extends Component {
 	};
 
 	// [{"nameSite":"zheriu","urlSite":"oijoij","date":1546646460000,"dateToDisplay":"2019-01-05T01:01"},{"nameSite":"porgjkroeijoij","urlSite":"eroijgoreijgiore","date":1546739760000,"dateToDisplay":"2019-01-06T02:56"},{"nameSite":"rzeareza","urlSite":"eza","date":1548979320000,"dateToDisplay":"2019-02-01T01:02"},{"nameSite":"rzeapiojr","urlSite":"oijroizejroiez","date":1580605320000,"dateToDisplay":"2020-02-02T02:02"}]
+	componentWillMount() {
+		this.setState({ storageArray: JSON.parse(localStorage.getItem('todo_sites')) || [] });
+		if (!localStorage.getItem('todo_sites')) {
+			localStorage.setItem('todo_sites', JSON.stringify(this.state.storageArray));
+		}
+	}
 
 	handleClickOnItem = e => {
 		const id = e.target.getAttribute( 'id' );
 		const todelete = e.target.getAttribute('todelete');
 
 		if ( todelete ) {
-			const myStorage = this.state.localStorage.filter( item => item !== this.state.localStorage[ id ] );
-			localStorage.setItem('todo_sites', JSON.stringify(myStorage));
-			this.setState( { localStorage: myStorage } );
+			/*if (this.state.localStorage.length > 0) {*/
+				const myStorage = this.state.localStorage.filter( item => item !== this.state.localStorage[ id ] );
+				localStorage.setItem('todo_sites', JSON.stringify(myStorage));
+				this.setState( { localStorage: myStorage } );
+			/*}*/
 		} else {
 			this.setState( {
 				id: id,
@@ -49,8 +57,8 @@ class MyProvider extends Component {
 					submitForm: e => {
 						e.preventDefault();
 						if (!this.state.nameSite && !this.state.nameUrl) { return false; }
-
 						const myStorage = this.state.localStorage;
+						
 						if (!this.state.id) {
 							myStorage.push( {
 								nameSite: this.state.nameSite,
@@ -100,14 +108,16 @@ class App extends Component {
 					) }
 				</MyContext.Consumer>
 
-				<MyContext.Consumer>
-					{ context => (
-						<List
-							storage={ context.state.localStorage }
-							click={ (e) => context.handleClickItem(e) }
-						/>
-					) }
-				</MyContext.Consumer>
+				{/*<main>*/}
+					<MyContext.Consumer>
+						{ context => (
+							<List
+								storage={ context.state.localStorage }
+								click={ (e) => context.handleClickItem(e) }
+							/>
+						) }
+					</MyContext.Consumer>
+				{/*</main>*/}
 			</MyProvider>
 		);
 	}
