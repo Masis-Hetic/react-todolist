@@ -13,3 +13,10 @@ ul.list-container li p {
 button {
   padding: 15px;
 }
+
+div.list-wrapper {
+  width: calc(100% - 50px);
+  position: absolute;
+  left: 50px;
+  top: 0;
+}

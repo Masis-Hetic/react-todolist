@@ -36,12 +36,12 @@ class MyProvider extends Component {
 			this.setState( { localStorage: myStorage } );
 		} else {
 			this.setState( {
-				toggleForm: this.state.toggleForm === 'close' ? 'open' : 'close',
 				id: id,
 				nameSite: this.state.localStorage[ id ].nameSite,
 				nameUrl: this.state.localStorage[ id ].urlSite,
 				dateToDisplay: this.state.localStorage[ id ].dateToDisplay
 			});
+			if (this.state.toggleForm === 'open') { this.setState({ toggleForm: 'close' }) }
 		}
 	};
 
@@ -72,7 +72,6 @@ class MyProvider extends Component {
 							myStorage[this.state.id].urlSite = this.state.nameUrl;
 							myStorage[this.state.id].dateToDisplay = this.state.dateToDisplay;
 							myStorage[this.state.id].date = Date.parse(this.state.dateToDisplay);
-
 							this.setState({ storageArray: myStorage });
 						}
 
@@ -87,7 +86,7 @@ class MyProvider extends Component {
 					},
 					handleClickItem: e => { this.handleClickOnItem(e); },
 					toggleFormOnClick: () => {
-						this.setState({ toggleForm: this.state.toggleForm === 'close' ? 'open' : 'close' } )
+						this.setState({ toggleForm: this.state.toggleForm === 'close' ? 'open' : 'close' } );
 					}
 				} }
 			>
@@ -118,13 +117,17 @@ class App extends Component {
 				</MyContext.Consumer>
 
 				<main>
-					<AsideNav />
+					<MyContext.Consumer>
+						{ context => (
+							<AsideNav click={ context.toggleFormOnClick } />
+						)}
+					</MyContext.Consumer>
 					<MyContext.Consumer>
 						{ context => (
 							<List
 								storage={ context.state.localStorage }
 								formProp={ context.state.toggleForm }
-								click={ (e) => context.handleClickItem(e) }
+								click={ e => context.handleClickItem(e) }
 							/>
 						) }
 					</MyContext.Consumer>
