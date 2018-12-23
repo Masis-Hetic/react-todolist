@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './CountDown.css';
+// import './CountDown.css';
 
 // import PropTypes from 'prop-types'
 
@@ -31,13 +31,13 @@ class Countdown extends Component {
 		}, 1000);
 	}
 
-	componentWillUnmount() { this.stop();	}
+	componentWillUnmount() { this.stop(); }
 
 	static calculateCountdown(endDate) {
 		let diff = Date.parse(new Date(endDate)) - new Date();
 
 		// clear countdown when date is reached
-		if (diff <= 0) return false;
+		if (diff <= 0) { return false; }
 
 		const timeLeft = {
 			years: 0,
@@ -70,7 +70,7 @@ class Countdown extends Component {
 		const countDown = this.state;
 
 		return (
-			<div className="countdown">
+			<span className="countdown">
         <span className="countdown-col">
           <span className="countdown-col-element">
               <strong>{Countdown.addLeadingZeros(countDown.days)}</strong>
@@ -99,7 +99,7 @@ class Countdown extends Component {
             <span>Sec</span>
           </span>
         </span>
-			</div>
+			</span>
 		);
 	}
 }
