@@ -1,0 +1,15 @@
+ul.list-container li {
+  background : antiquewhite;
+  display    : table;
+  margin     : 10px;
+  padding    : 15px;
+  cursor     : pointer;
+}
+
+ul.list-container li p {
+  pointer-events : none;
+}
+
+button {
+  padding: 15px;
+}
