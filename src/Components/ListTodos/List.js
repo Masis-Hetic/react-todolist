@@ -4,7 +4,17 @@ import './List.css';
 import Countdown from '../CountDown/CountDown';
 
 class List extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			date: ''
+		};
+	}
 	click;
+	
+	componentWillMount() {
+		this.setState({ date: this.props.storage });
+	}
 
 	render() {
 		return (
@@ -26,7 +36,7 @@ class List extends Component {
 						</button>
 						<p>{ item.nameSite }</p>
 						<p>{ item.urlSite }</p>
-						<p><Countdown date={ this.props.storage[ i ].date }/></p>
+						<p><Countdown date={ this.state.date[ i ].date }/></p>
 					</li>
 				)
 				}
