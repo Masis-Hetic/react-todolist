@@ -8,6 +8,7 @@ class List extends Component {
 
 	render() {
 		return (
+		<div className="list-wrapper">
 			<ul className="list-container">
 				{ this.props.storage &&
 				this.props.storage.map( ( item, i ) =>
@@ -30,6 +31,7 @@ class List extends Component {
 				)
 				}
 			</ul>
+		</div>
 		);
 	}
 }
