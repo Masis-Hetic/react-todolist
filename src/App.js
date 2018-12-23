@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Form from "./Components/Form/Form";
 import List from "./Components/ListSites/List";
+import AsideNav from "./Components/AsideNav/AsideNav";
 
 const MyContext = React.createContext();
 
@@ -12,6 +13,7 @@ class MyProvider extends Component {
 		date: 'yyyy-MM-ddThh:mm',
 		dateToDisplay: 'yyyy-MM-ddThh:mm',
 		id: null,
+		toggleForm: 'open',
 		storageArray: [],
 		localStorage: JSON.parse( localStorage.getItem( 'todo_sites' ) )
 	};
@@ -29,13 +31,12 @@ class MyProvider extends Component {
 		const todelete = e.target.getAttribute('todelete');
 
 		if ( todelete ) {
-			/*if (this.state.localStorage.length > 0) {*/
-				const myStorage = this.state.localStorage.filter( item => item !== this.state.localStorage[ id ] );
-				localStorage.setItem('todo_sites', JSON.stringify(myStorage));
-				this.setState( { localStorage: myStorage } );
-			/*}*/
+			const myStorage = this.state.localStorage.filter( item => item !== this.state.localStorage[ id ] );
+			localStorage.setItem('todo_sites', JSON.stringify(myStorage));
+			this.setState( { localStorage: myStorage } );
 		} else {
 			this.setState( {
+				toggleForm: this.state.toggleForm === 'close' ? 'open' : 'close',
 				id: id,
 				nameSite: this.state.localStorage[ id ].nameSite,
 				nameUrl: this.state.localStorage[ id ].urlSite,
@@ -57,8 +58,8 @@ class MyProvider extends Component {
 					submitForm: e => {
 						e.preventDefault();
 						if (!this.state.nameSite && !this.state.nameUrl) { return false; }
+
 						const myStorage = this.state.localStorage;
-						
 						if (!this.state.id) {
 							myStorage.push( {
 								nameSite: this.state.nameSite,
@@ -79,9 +80,15 @@ class MyProvider extends Component {
 						localStorage.setItem('todo_sites', JSON.stringify(myTab));
 
 						const date = 'yyyy-MM-ddThh:mm';
-						this.setState( { id: null, nameSite: '', nameUrl: '', date: date, dateToDisplay: date } );
+						this.setState( {
+							id: null, nameSite: '', nameUrl: '', date: date, dateToDisplay: date,
+							toggleForm: this.state.toggleForm === 'close' ? 'open' : 'close'
+						} );
 					},
-					handleClickItem: e => { this.handleClickOnItem(e); }
+					handleClickItem: e => { this.handleClickOnItem(e); },
+					toggleFormOnClick: () => {
+						this.setState({ toggleForm: this.state.toggleForm === 'close' ? 'open' : 'close' } )
+					}
 				} }
 			>
 				{ this.props.children }
@@ -104,20 +111,24 @@ class App extends Component {
 							urlValue={ context.state.nameUrl }
 							handleChangeDate={ context.changeDate }
 							dateValue={ context.state.dateToDisplay }
+							formProp={ context.state.toggleForm }
+							handleToggleForm={ context.toggleFormOnClick }
 						/>
 					) }
 				</MyContext.Consumer>
 
-				{/*<main>*/}
+				<main>
+					<AsideNav />
 					<MyContext.Consumer>
 						{ context => (
 							<List
 								storage={ context.state.localStorage }
+								formProp={ context.state.toggleForm }
 								click={ (e) => context.handleClickItem(e) }
 							/>
 						) }
 					</MyContext.Consumer>
-				{/*</main>*/}
+				</main>
 			</MyProvider>
 		);
 	}
