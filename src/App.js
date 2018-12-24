@@ -23,6 +23,7 @@ class MyProvider extends Component {
 		this.setState({ storageArray: JSON.parse(localStorage.getItem('todo_sites')) || [] });
 		if (!localStorage.getItem('todo_sites')) {
 			localStorage.setItem('todo_sites', JSON.stringify(this.state.storageArray));
+			this.setState({ localStorage: [] });
 		}
 	}
 
@@ -58,23 +59,23 @@ class MyProvider extends Component {
 						e.preventDefault();
 						if (!this.state.nameSite && !this.state.nameUrl) { return false; }
 
-						const myStorage = this.state.localStorage;
 						if (!this.state.id) {
-							myStorage.push( {
+							this.state.localStorage.push({
 								nameSite: this.state.nameSite,
 								urlSite: this.state.nameUrl,
 								date: this.state.date,
 								dateToDisplay: this.state.dateToDisplay
-							} );
+							});
 						} else {
+							const myStorage = this.state.localStorage;
 							myStorage[this.state.id].nameSite = this.state.nameSite;
 							myStorage[this.state.id].urlSite = this.state.nameUrl;
 							myStorage[this.state.id].dateToDisplay = this.state.dateToDisplay;
 							myStorage[this.state.id].date = Date.parse(this.state.dateToDisplay);
-							this.setState({ storageArray: myStorage });
+							this.setState({ localStorage: myStorage });
 						}
 
-						const myTab = myStorage.sort( (a, b) =>  a.date - b.date );
+						const myTab = this.state.localStorage.sort( ( a, b ) => a.date - b.date );
 						localStorage.setItem('todo_sites', JSON.stringify(myTab));
 
 						const date = 'yyyy-MM-ddThh:mm';
