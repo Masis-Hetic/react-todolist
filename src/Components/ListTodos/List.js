@@ -36,7 +36,11 @@ class List extends Component {
 						</button>
 						<p>{ item.nameSite }</p>
 						<p>{ item.urlSite }</p>
-						<p><Countdown date={ this.state.date[ i ].date }/></p>
+						<p>
+							{
+								this.props.storage.length < this.state.date.length ? null : <Countdown date={ this.state.date[ i ].date }/>
+							}
+						</p>
 					</li>
 				)
 				}

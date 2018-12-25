@@ -31,7 +31,7 @@ class Countdown extends Component {
 		}, 1000);
 	}
 
-	componentWillUnmount() { this.stop(); }
+	componentWillUnmount() { this.stop();	}
 
 	static calculateCountdown(endDate) {
 		let diff = Date.parse(new Date(endDate)) - new Date();

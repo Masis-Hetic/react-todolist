@@ -122,15 +122,15 @@ class App extends Component {
 							<AsideNav click={ context.toggleFormOnClick } />
 						)}
 					</MyContext.Consumer>
-					<MyContext.Consumer>
-						{ context => (
-							<List
-								storage={ context.state.localStorage }
-								formProp={ context.state.toggleForm }
-								click={ e => context.handleClickItem(e) }
-							/>
-						) }
-					</MyContext.Consumer>
+						<MyContext.Consumer>
+							{ context => (
+								<List
+									storage={ context.state.localStorage }
+									formProp={ context.state.toggleForm }
+									click={ e => context.handleClickItem(e) }
+								/>
+							) }
+						</MyContext.Consumer>
 				</main>
 			</MyProvider>
 		);
