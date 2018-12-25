@@ -8,18 +8,17 @@ class NameSite extends Component {
 		return (
 			<div className="wrapper">
 				<textarea
-					type="text"
-					placeholder="Nom du site"
+					placeholder="Tâche à ajouter"
 					onChange={ this.props.handleChanges }
 					value={ this.props.nameValue }
 				>
 				</textarea>
-				{/*<input*/}
-					{/*type="text"*/}
-					{/*placeholder="Nom du site"*/}
-					{/*onChange={ this.props.handleChanges }*/}
-					{/*value={ this.props.nameValue }*/}
-				{/*/>*/}
+				{/*<input*/ }
+				{/*type="text"*/ }
+				{/*placeholder="Nom du site"*/ }
+				{/*onChange={ this.props.handleChanges }*/ }
+				{/*value={ this.props.nameValue }*/ }
+				{/*/>*/ }
 			</div>
 		);
 	}

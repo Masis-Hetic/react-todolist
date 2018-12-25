@@ -13,23 +13,23 @@ class List extends Component {
 
 	click;
 
-	componentWillMount() {
-		this.setState( { date: this.props.storage } );
-	}
+	// componentWillMount() {
+	// 	this.setState( { date: this.props.storage } );
+	// }
 
-	componentWillReceiveProps( nextProps, nextContext ) {
-		// console.log( 'this.props.storage => ', this.props.storage );
-		// console.log( 'nextProps.storage => ', nextProps.storage );
-		if (nextProps.storage !== this.props.storage) { this.setState( { date: nextProps.storage } ); }
-	}
+	// componentWillReceiveProps( nextProps, nextContext ) {
+	// 	// console.log( 'this.props.storage => ', this.props.storage );
+	// 	// console.log( 'nextProps.storage => ', nextProps.storage );
+	// 	if (nextProps.storage !== this.props.storage) { this.setState( { date: nextProps.storage } ); }
+	// }
 
 	render() {
 		console.log( this.state.date );
 		return (
 			<div className="list-wrapper">
 				<ul className="list-container">
-					{ this.state.date &&
-					this.state.date.map( ( item, i ) =>
+					{ this.props.storage &&
+					this.props.storage.map( ( item, i ) =>
 						<li
 							key={ i }
 							id={ i }
@@ -45,9 +45,9 @@ class List extends Component {
 								</svg>
 							</div>
 							<p>{ item.nameSite }</p>
-							<p>{ item.urlSite }</p>
+							{/*<p>{ item.urlSite }</p>*/}
 							<p>
-								<Countdown date={ this.state.date[ i ].date }/>
+								<Countdown date={ this.props.storage[ i ].date }/>
 							</p>
 						</li>
 					)

@@ -7,7 +7,7 @@ import './Form.css';
 
 class Form extends Component {
 	handleChangeName;
-	handleChangeUrl;
+	// handleChangeUrl;
 	validForm;
 	urlValue;
 	handleChangeDate;

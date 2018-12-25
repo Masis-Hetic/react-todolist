@@ -16,10 +16,12 @@ form.close {
 }
 
 textarea {
-  display : block;
-  width   : 80%;
-  height  : 100px;
-  margin  : 0 auto 10px;
+  display   : block;
+  width     : 80%;
+  height    : 100px;
+  margin    : 0 auto 10px;
+  padding   : 10px;
+  font-size : 16px;
 }
 
 input {
@@ -27,8 +29,17 @@ input {
   margin  : 0 auto;
 }
 
+input[type="datetime-local"] {
+  padding   : 10px;
+  width     : 50%;
+  font-size : 14px;
+}
+
 input[type="submit"] {
   margin-top : 10px;
+  padding    : 8px 20px;
+  border     : none;
+  font-size  : 15px;
 }
 
 div.close_btn {

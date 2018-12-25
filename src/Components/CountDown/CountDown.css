@@ -1,0 +1,13 @@
+span.countdown {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+span.countdown-col-element {
+  display: flex;
+  flex-direction: column;
+}
+
+span.countdown-col-element > span { margin: 0 5px; }
+
+strong { text-align: center; }

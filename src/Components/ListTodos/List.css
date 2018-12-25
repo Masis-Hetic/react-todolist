@@ -9,19 +9,20 @@ ul {
 
 ul.list-container li {
   background      : antiquewhite;
-  padding         : 15px;
+  padding         : 7px 35px;
   cursor          : pointer;
-  min-height      : 170px;
+  min-height      : 120px;
   overflow-y      : scroll;
   position        : relative;
   display         : flex;
   flex-direction  : column;
   justify-content : space-between;
+  text-align      : justify;
 }
 
 ul.list-container li:nth-child(even) { margin : 10px 0; }
 
-ul.list-container li p { pointer-events : none; }
+ul.list-container li p { pointer-events : none; overflow: hidden; }
 
 div.button {
   position : absolute;

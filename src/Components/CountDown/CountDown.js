@@ -23,13 +23,13 @@ class Countdown extends Component {
 		}, 1000);
 	}
 
-	componentWillReceiveProps() {
-		// update every second
-		this.interval = setInterval(() => {
-			const date = Countdown.calculateCountdown(this.props.date);
-			date ? this.setState(date) : this.stop();
-		}, 1000);
-	}
+	// componentWillReceiveProps() {
+	// 	// update every second
+	// 	this.interval = setInterval(() => {
+	// 		const date = Countdown.calculateCountdown(this.props.date);
+	// 		date ? this.setState(date) : this.stop();
+	// 	}, 1000);
+	// }
 
 	componentWillUnmount() { this.stop();	}
 
