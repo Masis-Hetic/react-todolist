@@ -1,24 +1,38 @@
+ul {
+  padding         : 10px;
+  height          : 100%;
+  display         : flex;
+  justify-content : flex-start;
+  flex-direction  : column;
+  overflow-y      : scroll;
+}
+
 ul.list-container li {
-  background : antiquewhite;
-  /*display    : table;*/
-  height: 100%;
-  margin     : 10px;
-  padding    : 15px;
-  cursor     : pointer;
+  background      : antiquewhite;
+  padding         : 15px;
+  cursor          : pointer;
+  min-height      : 170px;
+  overflow-y      : scroll;
+  position        : relative;
+  display         : flex;
+  flex-direction  : column;
+  justify-content : space-between;
 }
 
-ul.list-container li p {
-  pointer-events : none;
+ul.list-container li:nth-child(even) { margin : 10px 0; }
+
+ul.list-container li p { pointer-events : none; }
+
+div.button {
+  position : absolute;
+  top      : 10px;
+  right    : 10px;
 }
 
-button {
-  padding: 15px;
-}
+
+div.button svg { pointer-events : none; }
 
 div.list-wrapper {
-  width: calc(100% - 50px);
-  height: 100%;
-  position: absolute;
-  left: 50px;
-  top: 0;
+  width  : 40vw;
+  height : 100%;
 }

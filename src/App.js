@@ -18,7 +18,7 @@ class MyProvider extends Component {
 		localStorage: JSON.parse( localStorage.getItem( 'todo_sites' ) )
 	};
 
-	// [{"nameSite":"zheriu","urlSite":"oijoij","date":1546646460000,"dateToDisplay":"2019-01-05T01:01"},{"nameSite":"porgjkroeijoij","urlSite":"eroijgoreijgiore","date":1546739760000,"dateToDisplay":"2019-01-06T02:56"},{"nameSite":"rzeareza","urlSite":"eza","date":1548979320000,"dateToDisplay":"2019-02-01T01:02"},{"nameSite":"rzeapiojr","urlSite":"oijroizejroiez","date":1580605320000,"dateToDisplay":"2020-02-02T02:02"}]
+	// [{"nameSite":"zheriu","urlSite":"oijoij","date":1546646460000,"dateToDisplay":"2019-01-05T01:01"},{"nameSite":"porgjkroeijoij","urlSite":"eroijgoreijgiore","date":1546739760000,"dateToDisplay":"2019-01-06T02:56"},{"nameSite":"rzeareza","urlSite":"eza","date":1548979320000,"dateToDisplay":"2019-02-01T01:02"},{"nameSite":"rzeapiojr","urlSite":"oijroizejroiez","date":1580605320000,"dateToDisplay":"2020-02-02T02:02"}, {"nameSite":"rzeapiojr","urlSite":"oijroizejroiez","date":1580605320000,"dateToDisplay":"2020-02-02T02:02"}, {"nameSite":"rzeapiojr","urlSite":"oijroizejroiez","date":1580605320000,"dateToDisplay":"2020-02-02T02:02"}, {"nameSite":"rzeapiojr","urlSite":"oijroizejroiez","date":1580605320000,"dateToDisplay":"2020-02-02T02:02"}, {"nameSite":"rzeapiojr","urlSite":"oijroizejroiez","date":1580605320000,"dateToDisplay":"2020-02-02T02:02"}]
 	componentWillMount() {
 		this.setState({ storageArray: JSON.parse(localStorage.getItem('todo_sites')) || [] });
 		if (!localStorage.getItem('todo_sites')) {
@@ -122,15 +122,26 @@ class App extends Component {
 							<AsideNav click={ context.toggleFormOnClick } />
 						)}
 					</MyContext.Consumer>
-						<MyContext.Consumer>
-							{ context => (
-								<List
-									storage={ context.state.localStorage }
-									formProp={ context.state.toggleForm }
-									click={ e => context.handleClickItem(e) }
-								/>
-							) }
-						</MyContext.Consumer>
+					<ul>
+						<li>
+							<h1>Work in progress => Todo :</h1>
+						</li>
+						<li>
+							- corriger le formulaire des todos (ajouter un textarea, et supprimer un input)
+						</li>
+						<li>
+							- ajouter un formulaire pour les sites préférés
+						</li>
+					</ul>
+					<MyContext.Consumer>
+						{ context => (
+							<List
+								storage={ context.state.localStorage }
+								formProp={ context.state.toggleForm }
+								click={ e => context.handleClickItem(e) }
+							/>
+						) }
+					</MyContext.Consumer>
 				</main>
 			</MyProvider>
 		);

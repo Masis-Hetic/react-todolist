@@ -1,15 +1,38 @@
 form {
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    width: 30vw;
-    height: 100vh;
-    background: aquamarine;
-    transition: 0.5s;
+  position    : absolute;
+  z-index     : 10;
+  top         : 0;
+  left        : 0;
+  width       : 30vw;
+  height      : 100vh;
+  padding-top : 50px;
+  background  : aquamarine;
+  transition  : 0.5s;
 }
 
 form.close {
-    left: -100%;
-    transition: 0.5s;
+  left       : -100%;
+  transition : 0.5s;
+}
+
+textarea {
+  display : block;
+  width   : 80%;
+  height  : 100px;
+  margin  : 0 auto 10px;
+}
+
+input {
+  display : table;
+  margin  : 0 auto;
+}
+
+input[type="submit"] {
+  margin-top : 10px;
+}
+
+div.close_btn {
+  position : absolute;
+  top      : 10px;
+  right    : 10px;
 }
