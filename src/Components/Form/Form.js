@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import NameSite from "../Inputs/NameSite";
+import AddTask from "../Inputs/addTask";
 // import UrlSite from "../Inputs/UrlSite";
 import InputDate from "../Inputs/InputDate";
 import './Form.css';
@@ -13,6 +13,7 @@ class Form extends Component {
 	handleChangeDate;
 	handleToggleForm;
 	formProp;
+	handleChangeTask;
 
 	render() {
 		return (
@@ -31,9 +32,9 @@ class Form extends Component {
 						/>
 					</svg>
 				</div>
-				<NameSite
-					handleChanges={ this.props.handleChangeName }
-					nameValue={ this.props.nameValue }
+				<AddTask
+					handleChanges={ this.props.handleChangeTask }
+					taskValue={ this.props.taskValue }
 				/>
 				{/*<UrlSite*/}
 					{/*handleChanges={ this.props.handleChangeUrl }*/}

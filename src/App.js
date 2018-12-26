@@ -10,19 +10,19 @@ class MyProvider extends Component {
 	state = {
 		nameSite: '',
 		nameUrl: '',
+		taskValue: '',
 		date: 'yyyy-MM-ddThh:mm',
 		dateToDisplay: 'yyyy-MM-ddThh:mm',
 		id: null,
 		toggleForm: 'open',
 		storageArray: [],
-		localStorage: JSON.parse( localStorage.getItem( 'todo_sites' ) )
+		localStorage: JSON.parse( localStorage.getItem( 'tasks_todo' ) )
 	};
 
-	// [{"nameSite":"zheriu","urlSite":"oijoij","date":1546646460000,"dateToDisplay":"2019-01-05T01:01"},{"nameSite":"porgjkroeijoij","urlSite":"eroijgoreijgiore","date":1546739760000,"dateToDisplay":"2019-01-06T02:56"},{"nameSite":"rzeareza","urlSite":"eza","date":1548979320000,"dateToDisplay":"2019-02-01T01:02"},{"nameSite":"rzeapiojr","urlSite":"oijroizejroiez","date":1580605320000,"dateToDisplay":"2020-02-02T02:02"}, {"nameSite":"rzeapiojr","urlSite":"oijroizejroiez","date":1580605320000,"dateToDisplay":"2020-02-02T02:02"}, {"nameSite":"rzeapiojr","urlSite":"oijroizejroiez","date":1580605320000,"dateToDisplay":"2020-02-02T02:02"}, {"nameSite":"rzeapiojr","urlSite":"oijroizejroiez","date":1580605320000,"dateToDisplay":"2020-02-02T02:02"}, {"nameSite":"rzeapiojr","urlSite":"oijroizejroiez","date":1580605320000,"dateToDisplay":"2020-02-02T02:02"}]
 	componentWillMount() {
-		this.setState( { storageArray: JSON.parse( localStorage.getItem( 'todo_sites' ) ) || [] } );
-		if (!localStorage.getItem( 'todo_sites' )) {
-			localStorage.setItem( 'todo_sites', JSON.stringify( this.state.storageArray ) );
+		this.setState( { storageArray: JSON.parse( localStorage.getItem( 'tasks_todo' ) ) || [] } );
+		if (!localStorage.getItem( 'tasks_todo' )) {
+			localStorage.setItem( 'tasks_todo', JSON.stringify( this.state.storageArray ) );
 			this.setState( { localStorage: [] } );
 		}
 	}
@@ -33,13 +33,13 @@ class MyProvider extends Component {
 
 		if (todelete) {
 			const myStorage = this.state.localStorage.filter( item => item !== this.state.localStorage[ id ] );
-			localStorage.setItem( 'todo_sites', JSON.stringify( myStorage ) );
+			localStorage.setItem( 'tasks_todo', JSON.stringify( myStorage ) );
 			this.setState( { localStorage: myStorage } );
 		} else {
 			this.setState( {
 				toggleForm: 'close',
 				id: id,
-				nameSite: this.state.localStorage[ id ].nameSite,
+				taskValue: this.state.localStorage[ id ].taskValue,
 				nameUrl: this.state.localStorage[ id ].urlSite,
 				dateToDisplay: this.state.localStorage[ id ].dateToDisplay
 			} );
@@ -52,25 +52,26 @@ class MyProvider extends Component {
 				value={ {
 					state: this.state,
 					handleClickOnItem: this.handleClickOnItem,
-					changeName: e => this.setState( { nameSite: e.target.value } ),
+					changeTask: e => this.setState( { taskValue: e.target.value } ),
 					changeUrl: e => this.setState( { nameUrl: e.target.value } ),
+					changeName: e => this.setState( { nameSite: e.target.value } ),
 					changeDate: e => this.setState( { date: Date.parse( e.target.value ), dateToDisplay: e.target.value } ),
 					submitForm: e => {
 						e.preventDefault();
-						if (!this.state.nameSite && !this.state.nameUrl) {
+						if (!this.state.taskValue && !this.state.nameUrl) {
 							return false;
 						}
 
 						if (!this.state.id) {
 							this.state.localStorage.push( {
-								nameSite: this.state.nameSite,
+								taskValue: this.state.taskValue,
 								urlSite: this.state.nameUrl,
 								date: this.state.date,
 								dateToDisplay: this.state.dateToDisplay
 							} );
 						} else {
 							const myStorage = this.state.localStorage;
-							myStorage[ this.state.id ].nameSite = this.state.nameSite;
+							myStorage[ this.state.id ].taskValue = this.state.taskValue;
 							myStorage[ this.state.id ].urlSite = this.state.nameUrl;
 							myStorage[ this.state.id ].dateToDisplay = this.state.dateToDisplay;
 							myStorage[ this.state.id ].date = Date.parse( this.state.dateToDisplay );
@@ -78,16 +79,16 @@ class MyProvider extends Component {
 						}
 
 						const myTab = this.state.localStorage.sort( ( a, b ) => a.date - b.date );
-						localStorage.setItem( 'todo_sites', JSON.stringify( myTab ) );
+						localStorage.setItem( 'tasks_todo', JSON.stringify( myTab ) );
 
 						const date = 'yyyy-MM-ddThh:mm';
 						this.setState( {
-							id: null, nameSite: '', nameUrl: '', date: date, dateToDisplay: date,
+							id: null, taskValue: '', nameUrl: '', date: date, dateToDisplay: date,
 							toggleForm: this.state.toggleForm === 'close' ? 'open' : 'close'
 						} );
 					},
 					handleClickItem: e => { this.handleClickOnItem( e ); },
-					toggleFormOnClick: () => {
+					toggleFormOnClick: (e) => {
 						this.setState( { toggleForm: this.state.toggleForm === 'close' ? 'open' : 'close' } );
 					}
 				} }
@@ -106,10 +107,10 @@ class App extends Component {
 					{ context => (
 						<Form
 							validForm={ context.submitForm }
-							handleChangeName={ context.changeName }
-							handleChangeUrl={ context.changeUrl }
-							nameValue={ context.state.nameSite }
-							urlValue={ context.state.nameUrl }
+							handleChangeTask={ context.changeTask }
+							// handleChangeUrl={ context.changeUrl }
+							taskValue={ context.state.taskValue }
+							// urlValue={ context.state.nameUrl }
 							handleChangeDate={ context.changeDate }
 							dateValue={ context.state.dateToDisplay }
 							formProp={ context.state.toggleForm }
