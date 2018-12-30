@@ -8,26 +8,59 @@ ul {
 }
 
 ul.list-container li {
-  background      : antiquewhite;
-  padding         : 7px 35px;
-  cursor          : pointer;
-  min-height      : 120px;
-  overflow-y      : scroll;
-  position        : relative;
-  display         : flex;
-  flex-direction  : column;
-  justify-content : space-between;
-  text-align      : justify;
+  background         : antiquewhite;
+  padding            : 7px 35px;
+  cursor             : pointer;
+  min-height         : 120px;
+  overflow-y         : scroll;
+  position           : relative;
+  display            : flex;
+  flex-direction     : column;
+  justify-content    : space-between;
+  text-align         : justify;
+  background         : var(--night_blue);
+  color              : var(--white);
+  border-radius      : 3px;
+  box-shadow         : 0 0 5px 0 rgb(23, 24, 28);
+  -webkit-transition : .1s ease-in-out;
+  -moz-transition    : .1s ease-in-out;
+  -ms-transition     : .1s ease-in-out;
+  -o-transition      : .1s ease-in-out;
+  transition         : .1s ease-in-out;
+}
+
+ul.list-container li:hover {
+  box-shadow         : 0 0 7px 1px rgb(23, 24, 28);
+  -webkit-transition : .1s ease-in-out;
+  -moz-transition    : .1s ease-in-out;
+  -ms-transition     : .1s ease-in-out;
+  -o-transition      : .1s ease-in-out;
+  transition         : .1s ease-in-out;
 }
 
 ul.list-container li:nth-child(even) { margin : 10px 0; }
 
-ul.list-container li p { pointer-events : none; overflow: hidden; }
+ul.list-container li p { pointer-events : none; overflow : hidden; }
 
 div.button {
   position : absolute;
   top      : 10px;
   right    : 10px;
+  opacity  : 0;
+  -webkit-transition : .3s ease-in-out;
+  -moz-transition    : .3s ease-in-out;
+  -ms-transition     : .3s ease-in-out;
+  -o-transition      : .3s ease-in-out;
+  transition         : .3s ease-in-out;
+}
+
+ul.list-container li:hover div.button {
+  opacity  : 1;
+  -webkit-transition : .3s ease-in-out;
+  -moz-transition    : .3s ease-in-out;
+  -ms-transition     : .3s ease-in-out;
+  -o-transition      : .3s ease-in-out;
+  transition         : .3s ease-in-out;
 }
 
 

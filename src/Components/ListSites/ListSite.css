@@ -34,8 +34,10 @@ ul.list-container__sites img {
 
 ul.list-container__sites a {
   text-decoration : none;
-  color           : #282c34;
+  /*color           : #282c34;*/
+  color           : var(--white);
   font-size       : 12px;
+
 }
 
 ul.list-container__sites svg,
@@ -52,10 +54,13 @@ ul.list-container__sites span.delete {
 
 
 span[role="edit"] {
-  width              : 20px;
-  line-height        : 10px;
+  width              : 17px;
   border-radius      : 50px;
-  padding-bottom     : 10px;
+  line-height        : 10px;
+  height             : 17px;
+  letter-spacing     : 3px;
+  padding-left       : 3px;
+  font-weight        : bold;
   text-align         : center;
   display            : block;
   opacity            : 0;
@@ -66,7 +71,8 @@ span[role="edit"] {
   position           : absolute;
   top                : 5px;
   left               : 5px;
-  background         : palegoldenrod;
+  background         : rgba(60, 99, 130, 0.8);
+  color              : var(--white);
 }
 
 ul.list-container__sites li:hover span[role="edit"] {

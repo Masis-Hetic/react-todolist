@@ -1,11 +1,52 @@
+@font-face {
+  font-family : "Dubai-Bold";
+  src         : url('./fonts/DubaiW23-Bold.eot');
+  src         : url('./fonts/DubaiW23-Bold.ttf');
+  src         : url('./fonts/DubaiW23-Bold.woff');
+  src         : url('./fonts/DubaiW23-Bold.woff2');
+}
+
+@font-face {
+  font-family : "Dubai-Light";
+  src         : url('./fonts/DubaiW23-Light.eot');
+  src         : url('./fonts/DubaiW23-Light.ttf');
+  src         : url('./fonts/DubaiW23-Light.woff');
+  src         : url('./fonts/DubaiW23-Light.woff2');
+}
+
+@font-face {
+  font-family : "Dubai-Medium";
+  src         : url('./fonts/DubaiW23-Medium.eot');
+  src         : url('./fonts/DubaiW23-Medium.ttf');
+  src         : url('./fonts/DubaiW23-Medium.woff');
+  src         : url('./fonts/DubaiW23-Medium.woff2');
+}
+
+@font-face {
+  font-family : "Dubai-Regular";
+  src         : url('./fonts/DubaiW23-Regular.eot');
+  src         : url('./fonts/DubaiW23-Regular.ttf');
+  src         : url('./fonts/DubaiW23-Regular.woff');
+  src         : url('./fonts/DubaiW23-Regular.woff2');
+}
+
+:root {
+  --night_blue : #273345;
+  --dark_blue  : #1e2835;
+  --light_blue : #4d9eeb;
+  --light_grey : #8b98a4;
+  --white      : #ffffff;
+}
+
 body {
   margin                  : 0;
   padding                 : 0;
-  font-family             : -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  font-family             : "Dubai-Light", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
   sans-serif;
   -webkit-font-smoothing  : antialiased;
   -moz-osx-font-smoothing : grayscale;
+  background              : var(--dark_blue);
 }
 
 code {
