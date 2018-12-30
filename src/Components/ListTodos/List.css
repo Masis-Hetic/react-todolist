@@ -1,5 +1,5 @@
 ul {
-  padding         : 10px;
+  padding         : 0 10px 0 10px;
   height          : 100%;
   display         : flex;
   justify-content : flex-start;
@@ -7,12 +7,24 @@ ul {
   overflow-y      : scroll;
 }
 
+ul.list-container {
+  padding-bottom : 70px;
+}
+
+ul.list-container::-webkit-scrollbar {
+  width      : 5px;
+  background : var(--dark_blue);
+}
+
+ul.list-container::-webkit-scrollbar-thumb {
+  background : #607D8B;
+}
+
 ul.list-container li {
-  background         : antiquewhite;
   padding            : 7px 35px;
   cursor             : pointer;
   min-height         : 120px;
-  overflow-y         : scroll;
+  flex-shrink        : 0;
   position           : relative;
   display            : flex;
   flex-direction     : column;
@@ -40,13 +52,22 @@ ul.list-container li:hover {
 
 ul.list-container li:nth-child(even) { margin : 10px 0; }
 
-ul.list-container li p { pointer-events : none; overflow : hidden; }
+ul.list-container li p.task {
+  max-height    : 350px;
+  overflow      : hidden;
+  overflow-y    : scroll;
+  padding-right : 7px;
+}
+
+ul.list-container li p.task::-webkit-scrollbar { width : 5px; }
+
+ul.list-container li p.task::-webkit-scrollbar-thumb { background : #607D8B; }
 
 div.button {
-  position : absolute;
-  top      : 10px;
-  right    : 10px;
-  opacity  : 0;
+  position           : absolute;
+  top                : 10px;
+  right              : 10px;
+  opacity            : 0;
   -webkit-transition : .3s ease-in-out;
   -moz-transition    : .3s ease-in-out;
   -ms-transition     : .3s ease-in-out;
@@ -55,7 +76,7 @@ div.button {
 }
 
 ul.list-container li:hover div.button {
-  opacity  : 1;
+  opacity            : 1;
   -webkit-transition : .3s ease-in-out;
   -moz-transition    : .3s ease-in-out;
   -ms-transition     : .3s ease-in-out;
@@ -67,6 +88,9 @@ ul.list-container li:hover div.button {
 div.button svg { pointer-events : none; }
 
 div.list-wrapper {
-  width  : 40vw;
-  height : 100%;
+  width       : 45vw;
+  height      : 100%;
+  padding-top : 10px;
 }
+
+div.list-wrapper:nth-of-type(1) { margin-right : calc(10vw - 50px); }

@@ -9,6 +9,7 @@ class NameSite extends Component {
 					placeholder="Nom du site"
 					onChange={ this.props.handleChanges }
 					value={ this.props.nameValue }
+					className="site-name"
 				/>
 			</div>
 		);

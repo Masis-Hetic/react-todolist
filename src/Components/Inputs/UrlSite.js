@@ -9,6 +9,7 @@ class UrlSite extends Component {
 					placeholder="Url du site"
 					onChange={ this.props.handleChanges }
 					value={ this.props.urlValue }
+					className="site-url"
 				/>
 			</div>
 		);

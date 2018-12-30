@@ -1,18 +1,32 @@
 div.list-wrapper__sites {
-
+  width       : 45vw;
+  padding-top : 10px;
 }
 
 ul.list-container__sites {
-
+  flex-direction  : row;
+  justify-content : flex-start;
+  flex-wrap       : wrap;
+  overflow-y      : scroll;
+  padding-bottom  : 50px;
+  max-height      : 100%;
+  align-content   : flex-start;
 }
 
 ul.list-container__sites li {
   position      : relative;
-  width         : 50px;
-  height        : 50px;
+  width         : 65px;
+  height        : 65px;
   border-radius : 5px;
   background    : #ccc;
-  margin        : 20px 0;
+  margin        : 0 15px 25px 0;
+}
+
+@media (max-width : 1280px) {
+  ul.list-container__sites li {
+    width  : 63px;
+    height : 63px;
+  }
 }
 
 ul.list-container__sites li:hover svg,
@@ -83,31 +97,26 @@ ul.list-container__sites li:hover span[role="edit"] {
   transition         : ease-in-out .3s;
 }
 
+p.name-site {
+  position          : absolute;
+  bottom            : -20px;
+  left              : 50%;
+  -webkit-transform : translateX(-50%);
+  -moz-transform    : translateX(-50%);
+  -ms-transform     : translateX(-50%);
+  -o-transform      : translateX(-50%);
+  transform         : translateX(-50%);
+  overflow          : hidden;
+  text-overflow     : ellipsis;
+  white-space       : nowrap;
+  width             : 80%;
+}
 
+ul.list-container__sites::-webkit-scrollbar {
+  width      : 5px;
+  background : var(--dark_blue);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ul.list-container__sites::-webkit-scrollbar-thumb {
+  background : #607D8B;
+}

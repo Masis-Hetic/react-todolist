@@ -21,7 +21,7 @@ class AsideNav extends Component {
 							onClick={ this.props.click }
 							className="site"
 						>
-							<img src={planet} alt=""/>
+							<img src={planet} alt="" className="site"/>
 							{/*<svg className="site" style={ { width: 24, height: 24 } } viewBox="0 0 24 24">*/}
 								{/*<path className="site" fill="#ffffff" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>*/}
 							{/*</svg>*/}
