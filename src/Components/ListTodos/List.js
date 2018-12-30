@@ -4,13 +4,6 @@ import './List.css';
 import Countdown from '../CountDown/CountDown';
 
 class List extends Component {
-	constructor( props ) {
-		super( props );
-		this.state = {
-			date: ''
-		};
-	}
-
 	click;
 
 	render() {
@@ -34,7 +27,6 @@ class List extends Component {
 								</svg>
 							</div>
 							<p>{ item.taskValue }</p>
-							{/*<p>{ item.urlSite }</p>*/}
 							<p>
 								<Countdown date={ this.props.storage[ i ].date }/>
 							</p>

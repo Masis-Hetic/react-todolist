@@ -1,0 +1,107 @@
+div.list-wrapper__sites {
+
+}
+
+ul.list-container__sites {
+
+}
+
+ul.list-container__sites li {
+  position      : relative;
+  width         : 50px;
+  height        : 50px;
+  border-radius : 5px;
+  background    : #ccc;
+  margin        : 20px 0;
+}
+
+ul.list-container__sites li:hover svg,
+ul.list-container__sites li:hover span.delete {
+  opacity            : 1;
+  -webkit-transition : ease-in-out .3s;
+  -moz-transition    : ease-in-out .3s;
+  -o-transition      : ease-in-out .3s;
+  transition         : ease-in-out .3s;
+}
+
+ul.list-container__sites a,
+ul.list-container__sites img {
+  display       : block;
+  width         : 100%;
+  height        : 100%;
+  border-radius : 5px;
+}
+
+ul.list-container__sites a {
+  text-decoration : none;
+  color           : #282c34;
+  font-size       : 12px;
+}
+
+ul.list-container__sites svg,
+ul.list-container__sites span.delete {
+  position           : absolute;
+  top                : 4px;
+  right              : 0;
+  opacity            : 0;
+  -webkit-transition : ease-in-out .3s;
+  -moz-transition    : ease-in-out .3s;
+  -o-transition      : ease-in-out .3s;
+  transition         : ease-in-out .3s;
+}
+
+
+span[role="edit"] {
+  width              : 20px;
+  line-height        : 10px;
+  border-radius      : 50px;
+  padding-bottom     : 10px;
+  text-align         : center;
+  display            : block;
+  opacity            : 0;
+  -webkit-transition : ease-in-out .3s;
+  -moz-transition    : ease-in-out .3s;
+  -o-transition      : ease-in-out .3s;
+  transition         : ease-in-out .3s;
+  position           : absolute;
+  top                : 5px;
+  left               : 5px;
+  background         : palegoldenrod;
+}
+
+ul.list-container__sites li:hover span[role="edit"] {
+  opacity            : 1;
+  -webkit-transition : ease-in-out .3s;
+  -moz-transition    : ease-in-out .3s;
+  -o-transition      : ease-in-out .3s;
+  transition         : ease-in-out .3s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
