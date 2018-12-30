@@ -1,5 +1,8 @@
 #### L'objectif de ce repo est de me familiariser avec React.
 
+<img width="980" alt="screen" src="https://user-images.githubusercontent.com/24521908/50552446-c36df580-0c93-11e9-9215-73bbe8d6953a.png">
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
