@@ -5,6 +5,16 @@ class ListSites extends Component {
 	edit;
 	deleteItem;
 
+	controlUrls = sitesUrlValue => {
+		if (sitesUrlValue.slice(0, 12) === "https://www.") { sitesUrlValue = sitesUrlValue.slice(12); }
+		if (sitesUrlValue.slice(0, 11) === "http://www.") { sitesUrlValue = sitesUrlValue.slice(11); }
+		if (sitesUrlValue.slice(0, 8) === "https://") { sitesUrlValue = sitesUrlValue.slice(8); }
+		if (sitesUrlValue.slice(0, 7) === "http://") { sitesUrlValue = sitesUrlValue.slice(7); }
+		if (sitesUrlValue.slice(0, 4) === 'www.') { sitesUrlValue = sitesUrlValue.slice(4); }
+
+		return sitesUrlValue;
+	};
+
 	render() {
 		return (
 			<div className="list-wrapper__sites">
@@ -16,10 +26,10 @@ class ListSites extends Component {
 							key={ i }
 							id={ i }
 						>
-							<a href={ `//${ item.urlSite }` } key={ i } target="_blank">
+							<a href={`http://${item.urlSite}`} key={ i } target="_blank">
 								<img
 									key={ i }
-									src={ `//logo.clearbit.com/${ item.urlSite }` }
+									src={ `http://logo.clearbit.com/${ this.controlUrls(item.urlSite) }` }
 									alt=""
 								/>
 								<p className="name-site">{ item.nameSite }</p>

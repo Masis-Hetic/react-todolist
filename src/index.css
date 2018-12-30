@@ -63,6 +63,7 @@ h2 {
   padding-left  : 10px;
   color         : var(--white);
   margin-bottom : 20px;
+  font-weight   : 400;
 }
 
 ul { list-style-type : none; }

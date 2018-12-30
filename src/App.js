@@ -61,10 +61,14 @@ class MyProvider extends Component {
 	handleClickEdit = (e) => {
 		const id = e.target.getAttribute( 'id' );
 
+		if (this.state.toggleForm === 'close') {
+			this.setState({ toggleForm: 'close' });
+		} else {
+			this.setState( { toggleForm: this.state.toggleForm === 'close' ? 'open' : 'close' } );
+		}
 		this.setState( {
 			id: id,
 			taskOrSite: 'site',
-			toggleForm: this.state.toggleForm === 'close' ? 'open' : 'close',
 			nameSite: this.state.localStorageSites[ id ].nameSite,
 			nameUrl: this.state.localStorageSites[ id ].urlSite
 		} );
@@ -138,16 +142,25 @@ class MyProvider extends Component {
 						}
 					},
 					handleClickItem: e => { this.handleClickOnItem( e ); },
-					handleClickEdit: e => { e.stopPropagation(); this.handleClickEdit(e) },
+					handleClickEdit: this.handleClickEdit,
 					handleClickDelete: e => { e.stopPropagation(); this.handleClickDelete(e) },
 					toggleFormOnClick: (e) => {
 						if (e.target.getAttribute( 'class' )) {
 							this.setState({ taskOrSite: e.target.getAttribute('class') } );
 						}
-						if (e.target.getAttribute( 'class' ) === 'close_btn') {
-							this.setState({ taskValue: '', dateToDisplay: 'yyyy-MM-ddThh:mm', nameSite: '', nameUrl: '', id: null});
+
+						if (this.state.taskOrSite === e.target.getAttribute( 'class' )) {
+							this.setState({ toggleForm: 'open', taskOrSite: '' });
+						} else {
+							this.setState({ toggleForm: 'close' });
 						}
-						this.setState( { toggleForm: this.state.toggleForm === 'close' ? 'open' : 'close' } );
+
+						if (e.target.getAttribute( 'class' ) === 'close_btn') {
+							this.setState({
+								taskValue: '', dateToDisplay: 'yyyy-MM-ddThh:mm', nameSite: '', nameUrl: '',
+								id: null, toggleForm: this.state.toggleForm === 'close' ? 'open' : 'close'
+							});
+						}
 					}
 				} }
 			>
@@ -196,6 +209,7 @@ class App extends Component {
 								storage={ context.state.localStorage }
 								formProp={ context.state.toggleForm }
 								click={ e => context.handleClickItem( e ) }
+								// click={ context.handleClickItem }
 							/>
 						) }
 					</MyContext.Consumer>
