@@ -4,6 +4,7 @@ aside {
   height     : 100vh;
 }
 
+
 nav {
   display         : flex;
   flex-direction  : column;
@@ -12,6 +13,10 @@ nav {
 }
 
 nav ul { justify-content: center; }
+
+nav ul::-webkit-scrollbar {
+  width: 0;
+}
 
 li {
   text-align : center;
