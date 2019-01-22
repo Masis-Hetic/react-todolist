@@ -10,7 +10,7 @@ class ListSites extends Component {
 		if (sitesUrlValue.slice(0, 11) === "http://www.") { sitesUrlValue = sitesUrlValue.slice(11); }
 		if (sitesUrlValue.slice(0, 8) === "https://") { sitesUrlValue = sitesUrlValue.slice(8); }
 		if (sitesUrlValue.slice(0, 7) === "http://") { sitesUrlValue = sitesUrlValue.slice(7); }
-		if (sitesUrlValue.slice(0, 4) === 'www.') { sitesUrlValue = sitesUrlValue.slice(4); }
+		if (sitesUrlValue.slice(0, 4) === "www.") { sitesUrlValue = sitesUrlValue.slice(4); }
 
 		return sitesUrlValue;
 	};
@@ -26,7 +26,7 @@ class ListSites extends Component {
 							key={ i }
 							id={ i }
 						>
-							<a href={`http://${item.urlSite}`} key={ i } target="_blank">
+							<a href={`${item.urlSite}`} key={ i } target="_blank">
 								<img
 									key={ i }
 									src={ `http://logo.clearbit.com/${ this.controlUrls(item.urlSite) }` }

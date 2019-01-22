@@ -209,7 +209,6 @@ class App extends Component {
 								storage={ context.state.localStorage }
 								formProp={ context.state.toggleForm }
 								click={ e => context.handleClickItem( e ) }
-								// click={ context.handleClickItem }
 							/>
 						) }
 					</MyContext.Consumer>
